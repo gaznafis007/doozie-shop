@@ -31,20 +31,30 @@ export const searchItems = async (params) => {
       from_scheduler: false,
     };
 
+    console.log('Sending request to API:', {
+        url: `${API_BASE_URL}/items/search`,
+        body: requestBody,
+      });
     const response = await axios.post(`${API_BASE_URL}/items/search`, requestBody, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
+    console.log(response, response?.data)
     // Combine and normalize results from both platforms
     const combinedResults = [
       ...(response.data.rakuten?.Items?.map(item => normalizeRakutenItem(item)) || []),
       ...(response.data.yahoo?.hits?.map(item => normalizeYahooItem(item)) || []),
     ];
-
+    console.log('Normalized results:', combinedResults);
     return combinedResults;
   } catch (error) {
+    console.error('Error searching items:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status,
+      });
     console.error('Error searching items:', error.response?.data || error.message);
     throw error;
   }

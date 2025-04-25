@@ -7,60 +7,47 @@ const SearchContext = createContext();
  * SearchProvider component to manage search state
  */
 export const SearchProvider = ({ children }) => {
-  // Search state
-  const [searchParams, setSearchParams] = useState({
-    keyword: '',
-    minPrice: '',
-    maxPrice: '',
-    sort: '',
-    sortDirection: 'desc'
-  });
+    const [searchParams, setSearchParams] = useState({
+      keyword: '',
+      minPrice: '',
+      maxPrice: '',
+      sort: '',
+      sortDirection: 'desc',
+      page: 1, // Add page to search params
+    });
   
-  // Search results state
-  const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
   
-  // Loading state
-  const [isLoading, setIsLoading] = useState(false);
+    const updateSearchParams = (newParams) => {
+      setSearchParams(prev => ({
+        ...prev,
+        ...newParams,
+      }));
+    };
   
-  // Error state
-  const [error, setError] = useState(null);
-
-  /**
-   * Update search parameters
-   * @param {Object} newParams - New search parameters
-   */
-  const updateSearchParams = (newParams) => {
-    setSearchParams(prev => ({
-      ...prev,
-      ...newParams
-    }));
+    const clearResults = () => {
+      setSearchResults([]);
+    };
+  
+    const value = {
+      searchParams,
+      searchResults,
+      isLoading,
+      error,
+      updateSearchParams,
+      setSearchResults,
+      setIsLoading,
+      setError,
+      clearResults,
+    };
+  
+    return (
+      <SearchContext.Provider value={value}>
+        {children}
+      </SearchContext.Provider>
+    );
   };
-
-  /**
-   * Clear search results
-   */
-  const clearResults = () => {
-    setSearchResults([]);
-  };
-
-  // Context value
-  const value = {
-    searchParams,
-    searchResults,
-    isLoading,
-    error,
-    updateSearchParams,
-    setSearchResults,
-    setIsLoading,
-    setError,
-    clearResults
-  };
-
-  return (
-    <SearchContext.Provider value={value}>
-      {children}
-    </SearchContext.Provider>
-  );
-};
 
 export default SearchContext;

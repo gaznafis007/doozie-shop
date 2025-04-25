@@ -62,6 +62,7 @@ const SearchResults = () => {
     setFilteredResults(results);
   }, [searchResults, searchParams]);
 
+  console.log(filteredResults)
   if (isLoading) {
     return (
       <div className="flex justify-center items-center py-12">
