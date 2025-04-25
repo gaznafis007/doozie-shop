@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
+
 /**
  * Layout component for the e-commerce application
  */

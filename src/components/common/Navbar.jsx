@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 /**
  * Navbar component for the e-commerce application
@@ -12,7 +11,7 @@ const Navbar = () => {
         <nav>
           <ul className="flex space-x-4">
             <li>
-              <Link to="/" className="hover:underline">Home</Link>
+              <a href="/" className="hover:underline">Home</a>
             </li>
           </ul>
         </nav>
