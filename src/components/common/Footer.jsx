@@ -1,0 +1,16 @@
+import React from 'react';
+
+/**
+ * Footer component for the e-commerce application
+ */
+const Footer = () => {
+  return (
+    <footer className="bg-gray-800 text-white p-4 mt-auto">
+      <div className="container mx-auto text-center">
+        <p>&copy; {new Date().getFullYear()} Doozie Shop. All rights reserved.</p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
